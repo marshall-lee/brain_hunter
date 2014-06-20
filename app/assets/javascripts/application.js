@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.tagsinput
+//= require jquery-ui
 //= require turbolinks
 //= require_tree .
