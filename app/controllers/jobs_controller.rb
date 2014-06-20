@@ -62,7 +62,7 @@ class JobsController < ApplicationController
     end
   end
 
-  # GET /jobs/skills
+  # GET /jobs/search_skills
   def search_skills
     query = params[:term] || ""
     skills = unless query.empty?
