@@ -12,4 +12,14 @@ class Candidate < ActiveRecord::Base
   def related_jobs
     find_related_skills_for(Job)
   end
+
+  def matching_and_related_jobs
+    jobs = related_jobs.to_a
+    self_skills = self.skill_list.sort
+    matching_jobs = jobs.select do |job|
+      self_skills == job.skill_list.sort
+    end
+    jobs = jobs - matching_jobs
+    [matching_jobs, jobs]
+  end
 end
