@@ -30,7 +30,7 @@ RSpec.describe Job, :type => :model do
     before(:each) do
       @job = FactoryGirl.create(:job, skill_list: "rails, jquery, css")
       @candidate1 = FactoryGirl.create(:candidate, skill_list: "rails, css")
-      @candidate2 = FactoryGirl.create(:candidate, skill_list: "rails, css, jquery")
+      @candidate2 = FactoryGirl.create(:candidate, skill_list: "rails, css, jquery, capistrano")
       @candidate3 = FactoryGirl.create(:candidate, skill_list: "jquery")
       @candidate4 = FactoryGirl.create(:candidate, skill_list: "django, blowjob")
       @related_candidates = @job.related_candidates
@@ -45,6 +45,13 @@ RSpec.describe Job, :type => :model do
 
     it "works with right ordering" do
       expect(@related_candidates).to be == [@candidate2,@candidate1,@candidate3]
+    end
+
+    it "works well inside matching_and_related_candidates method" do
+      @candidate5 = FactoryGirl.create(:candidate, skill_list: "css, rails, jquery")
+      matching_candidates, candidates = @job.matching_and_related_candidates
+      expect(matching_candidates).to be == [@candidate5]
+      expect(candidates).to be == [@candidate2,@candidate1,@candidate3]
     end
   end
 end
