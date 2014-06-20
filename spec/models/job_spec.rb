@@ -25,4 +25,26 @@ RSpec.describe Job, :type => :model do
       expect(job).to respond_to(:find_related_skills_for)
     end
   end
+
+  describe "related_candidates" do
+    before(:each) do
+      @job = FactoryGirl.create(:job, skill_list: "rails, jquery, css")
+      @candidate1 = FactoryGirl.create(:candidate, skill_list: "rails, css")
+      @candidate2 = FactoryGirl.create(:candidate, skill_list: "rails, css, jquery")
+      @candidate3 = FactoryGirl.create(:candidate, skill_list: "jquery")
+      @candidate4 = FactoryGirl.create(:candidate, skill_list: "django, blowjob")
+      @related_candidates = @job.related_candidates
+    end
+
+    it "just works" do
+      expect(@related_candidates).to include(@candidate1)
+      expect(@related_candidates).to include(@candidate2)
+      expect(@related_candidates).to include(@candidate3)
+      expect(@related_candidates).not_to include(@candidate4)
+    end
+
+    it "works with right ordering" do
+      expect(@related_candidates).to be == [@candidate2,@candidate1,@candidate3]
+    end
+  end
 end
