@@ -39,6 +39,7 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'enumerize'
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem 'minitest'
