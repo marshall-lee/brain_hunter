@@ -8,6 +8,10 @@ class Candidate < ActiveRecord::Base
   enumerize :status, in: STATUSES, default: :searching,
     scope: true, predicates: true
 
+  scope :order_by_expected_salary, -> {
+    order(expected_salary: :asc)
+  }
+
   def related_jobs
     find_related_skills_for(Job)
   end
