@@ -34,7 +34,7 @@ RSpec.describe Candidate, :type => :model do
 
   describe "related_jobs" do
     before(:each) do
-      @candidate = FactoryGirl.create(:candidate, skill_list: "rails, jquery, css")
+      @candidate = FactoryGirl.create(:candidate, skill_list: "rails, jquery, css, magic")
       @job1 = FactoryGirl.create(:job, skill_list: "rails, css")
       @job2 = FactoryGirl.create(:job, skill_list: "rails, css, jquery, capistrano")
       @job3 = FactoryGirl.create(:job, skill_list: "jquery")
@@ -54,10 +54,9 @@ RSpec.describe Candidate, :type => :model do
     end
 
     it "works well inside matching_and_related_jobs method" do
-      @job5 = FactoryGirl.create(:job, skill_list: "css, rails, jquery")
       matching_jobs, jobs = @candidate.matching_and_related_jobs
-      expect(matching_jobs).to be == [@job5]
-      expect(jobs).to be == [@job2,@job1,@job3]
+      expect(matching_jobs).to be == [@job1,@job3]
+      expect(jobs).to be == [@job2]
     end
   end
 end

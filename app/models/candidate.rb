@@ -15,9 +15,10 @@ class Candidate < ActiveRecord::Base
 
   def matching_and_related_jobs
     jobs = related_jobs.to_a
-    self_skills = self.skill_list.sort
+    candidate_skill_set = Set[*skill_list]
     matching_jobs = jobs.select do |job|
-      self_skills == job.skill_list.sort
+      job_skills = job.skill_list
+      candidate_skill_set.intersection(job_skills).length == job_skills.length
     end
     jobs = jobs - matching_jobs
     [matching_jobs, jobs]
