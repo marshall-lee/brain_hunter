@@ -1,10 +1,9 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
   factory :candidate do
-    name "MyString"
-    email "MyString"
-    expected_salary 1
-    status 1
+    sequence(:name) { |n| "Jerk number #{n}" }
+    email "someone@gmail.com"
+    expected_salary 60000
+    status :searching
   end
 end
