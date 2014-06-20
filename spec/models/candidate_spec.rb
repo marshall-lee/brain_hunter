@@ -1,5 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Candidate, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it "responds to scopes and methods provided by Enumerize" do
+    expect(Candidate).to respond_to(:with_status)
+
+    candidate = FactoryGirl.build :candidate
+    expect(candidate).to respond_to(:searching?)
+    expect(candidate).to respond_to(:employed?)
+  end
+
+  it "has Enumerize predicates work right" do
+    candidate = FactoryGirl.build :candidate
+    candidate.status = :searching
+    expect(candidate).to be_searching
+    expect(candidate).not_to be_employed
+    candidate.status = :employed
+    expect(candidate).to be_employed
+    expect(candidate).not_to be_searching
+  end
+
 end
