@@ -41,6 +41,8 @@ gem 'spring',        group: :development
 gem 'enumerize'
 
 group :development, :test do
+  gem 'minitest'
   gem 'rspec-rails', '~> 3.0.0'
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
 end
