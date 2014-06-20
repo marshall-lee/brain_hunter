@@ -23,4 +23,12 @@ RSpec.describe Candidate, :type => :model do
     end
   end
 
+  describe "skills" do
+    it "responds to scopes and methods provided by ActsAsTaggableOn" do
+      expect(Candidate).to respond_to(:skill_counts)
+      candidate = FactoryGirl.build :candidate
+      expect(candidate).to respond_to(:skill_list)
+    end
+  end
+
 end

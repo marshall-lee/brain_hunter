@@ -6,4 +6,6 @@ class Candidate < ActiveRecord::Base
   STATUSES = { searching: 1, employed: 2 }
   enumerize :status, in: STATUSES, default: :searching,
     scope: true, predicates: true
+
+  acts_as_taggable_on :skills
 end
