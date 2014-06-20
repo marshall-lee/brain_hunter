@@ -4,6 +4,9 @@ class Job < ActiveRecord::Base
   validates_presence_of :title
 
   scope :actual, -> { where(':now < expires_at', now: Time.now) }
+  scope :order_by_salary, -> {
+    order(salary: :desc)
+  }
 
   def related_candidates
     find_related_skills_for(Candidate)
