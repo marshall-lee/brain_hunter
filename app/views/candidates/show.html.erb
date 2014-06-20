@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h1>
   <%= @candidate.name %>
-</p>
+</h1>
 
 <p>
   <strong>Email:</strong>
@@ -19,6 +18,29 @@
   <strong>Status:</strong>
   <%= @candidate.status %>
 </p>
+
+<p>
+  <strong>Skills:</strong>
+  <%= @candidate.skill_list.join(", ") %>
+</p>
+
+<% if @matching_jobs.any? %>
+  <div>Best jobs:</div>
+  <ul>
+  <% @matching_jobs.each do |job| %>
+    <li><%= link_to job.title, job %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<% if @related_jobs.any? %>
+  <div>Related jobs:</div>
+  <ul>
+  <% @related_jobs.each do |job| %>
+    <li><%= link_to job.title, job %></li>
+  <% end %>
+  </ul>
+<% end %>
 
 <%= link_to 'Edit', edit_candidate_path(@candidate) %> |
 <%= link_to 'Back', candidates_path %>

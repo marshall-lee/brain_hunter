@@ -10,6 +10,7 @@ class CandidatesController < ApplicationController
   # GET /candidates/1
   # GET /candidates/1.json
   def show
+    @matching_jobs, @related_jobs = @candidate.matching_and_related_jobs
   end
 
   # GET /candidates/new
