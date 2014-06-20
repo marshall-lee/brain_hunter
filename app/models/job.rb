@@ -19,4 +19,12 @@ class Job < ActiveRecord::Base
     candidates = candidates - matching_candidates
     [matching_candidates, candidates]
   end
+
+  def self.all_skills
+    tags_on(:skills).pluck(:name)
+  end
+
+  def self.all_skills_like(query)
+    tags_on(:skills).where("name like :query", query: query).pluck(:name)
+  end
 end

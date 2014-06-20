@@ -59,4 +59,22 @@ RSpec.describe Candidate, :type => :model do
       expect(jobs).to be == [@job2]
     end
   end
+
+  describe "all_skills" do
+    before(:each) do
+      FactoryGirl.create(:candidate, skill_list: "rails, jquery")
+      FactoryGirl.create(:candidate, skill_list: "ruby")
+      FactoryGirl.create(:candidate, skill_list: "ruby on rails")
+    end
+
+    it "returns right all_skills" do
+      expect(Candidate.all_skills).to include("rails", "ruby on rails", "ruby", "jquery")
+    end
+
+    it "performs all_skills_like right" do
+      skills = Candidate.all_skills_like("ruby%")
+      expect(skills).to include("ruby", "ruby on rails")
+      expect(skills).not_to include("rails")
+    end
+  end
 end
