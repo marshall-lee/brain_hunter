@@ -13,7 +13,7 @@ class Candidate < ActiveRecord::Base
   end
 
   def matching_and_related_jobs
-    jobs = related_jobs.to_a
+    jobs = related_jobs.actual.to_a
     candidate_skill_set = Set[*skill_list]
     matching_jobs = jobs.select do |job|
       job_skills = job.skill_list
