@@ -1,7 +1,7 @@
 class Job < ActiveRecord::Base
-  validates_presence_of :title
+  include Skills
 
-  acts_as_taggable_on :skills
+  validates_presence_of :title
 
   scope :actual, -> { where(':now < expires_at', now: Time.now) }
 
@@ -18,13 +18,5 @@ class Job < ActiveRecord::Base
     end
     candidates = candidates - matching_candidates
     [matching_candidates, candidates]
-  end
-
-  def self.all_skills
-    tags_on(:skills).pluck(:name)
-  end
-
-  def self.all_skills_like(query)
-    tags_on(:skills).where("name like :query", query: query).pluck(:name)
   end
 end
