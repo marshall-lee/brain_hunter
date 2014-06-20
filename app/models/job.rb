@@ -10,7 +10,7 @@ class Job < ActiveRecord::Base
   end
 
   def matching_and_related_candidates
-    candidates = related_candidates.to_a
+    candidates = related_candidates.with_status(:searching).to_a
     job_skill_set = Set[*skill_list]
     matching_candidates = candidates.select do |candidate|
       candidate_skills = candidate.skill_list
