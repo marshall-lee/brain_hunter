@@ -61,6 +61,18 @@ class JobsController < ApplicationController
     end
   end
 
+  # GET /jobs/skills
+  def search_skills
+    query = params[:term] || ""
+    skills = unless query.empty?
+      # TODO: refactor this later :)
+      Set[*Job.all_skills_like("#{query}%"), *Candidate.all_skills_like("#{query}%")]
+    else
+      []
+    end
+    render json: skills
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_job
@@ -69,6 +81,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:title, :expires_at, :salary, :email)
+      params.require(:job).permit(:title, :expires_at, :salary, :email, :skill_list)
     end
 end

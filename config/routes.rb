@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :candidates
-
-  resources :jobs
+  concern :skillable do
+    get "search_skills", on: :collection
+  end
+  resources :candidates, concerns: :skillable
+  resources :jobs, concerns: :skillable
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
