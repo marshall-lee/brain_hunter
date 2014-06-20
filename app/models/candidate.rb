@@ -8,4 +8,8 @@ class Candidate < ActiveRecord::Base
     scope: true, predicates: true
 
   acts_as_taggable_on :skills
+
+  def related_jobs
+    find_related_skills_for(Job)
+  end
 end
