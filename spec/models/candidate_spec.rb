@@ -20,4 +20,6 @@ RSpec.describe Candidate, :type => :model do
     expect(candidate).not_to be_searching
   end
 
+  it { should validate_presence_of(:name) }
+
 end
