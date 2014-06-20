@@ -16,4 +16,13 @@ RSpec.describe Job, :type => :model do
       expect(Job.actual).not_to be_include(expired_job)
     end
   end
+
+  describe "skills" do
+    it "responds to scopes and methods provided by ActsAsTaggableOn" do
+      expect(Job).to respond_to(:skill_counts)
+      job = FactoryGirl.build :job
+      expect(job).to respond_to(:skill_list)
+      expect(job).to respond_to(:find_related_skills_for)
+    end
+  end
 end
